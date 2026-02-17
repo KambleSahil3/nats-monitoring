@@ -226,12 +226,24 @@
         "type": "prometheus",
         "uid": "${prom_ds}"
       },
+      "description": "",
       "fieldConfig": {
         "defaults": {
           "color": {
-            "mode": "thresholds"
+            "fixedColor": "rgb(31, 120, 193)",
+            "mode": "fixed"
           },
-          "mappings": [],
+          "mappings": [
+            {
+              "options": {
+                "match": "null",
+                "result": {
+                  "text": "N/A"
+                }
+              },
+              "type": "special"
+            }
+          ],
           "thresholds": {
             "mode": "absolute",
             "steps": [
@@ -244,21 +256,19 @@
                 "value": 80
               }
             ]
-          }
+          },
+          "unit": "short"
         },
         "overrides": [
           {
             "matcher": {
-              "id": "byName",
-              "options": "Errors"
+              "id": "byRegexp",
+              "options": "/.+_bytes.+/"
             },
             "properties": [
               {
-                "id": "color",
-                "value": {
-                  "fixedColor": "red",
-                  "mode": "fixed"
-                }
+                "id": "unit",
+                "value": "Bps"
               }
             ]
           }
@@ -270,10 +280,13 @@
         "x": 11,
         "y": 1
       },
-      "id": 305,
+      "hideTimeOverride": true,
+      "id": 298,
+      "interval": "$ScrapeInterval",
+      "maxPerRow": 12,
       "options": {
         "colorMode": "value",
-        "graphMode": "area",
+        "graphMode": "none",
         "justifyMode": "auto",
         "orientation": "vertical",
         "percentChangeColorMode": "standard",
@@ -286,53 +299,26 @@
         },
         "showPercentChange": false,
         "text": {},
-        "textMode": "auto",
+        "textMode": "name",
         "wideLayout": true
       },
       "pluginVersion": "12.3.3",
       "targets": [
         {
-          "editorMode": "builder",
+          "editorMode": "code",
           "exemplar": false,
-          "expr": "nats_core_jetstream_api_requests",
-          "format": "table",
-          "instant": true,
-          "legendFormat": "__auto",
-          "range": false,
-          "refId": "A"
-        },
-        {
-          "editorMode": "builder",
-          "exemplar": false,
-          "expr": "nats_core_jetstream_api_errors",
-          "format": "table",
+          "expr": "nats_core_jetstream_cluster_raft_group_leader > 0",
+          "format": "time_series",
           "hide": false,
           "instant": true,
-          "legendFormat": "__auto",
+          "interval": "",
+          "legendFormat": "{{server_name}}",
           "range": false,
-          "refId": "B"
+          "refId": "A"
         }
       ],
-      "title": "API Statistics",
-      "transformations": [
-        {
-          "id": "concatenate",
-          "options": {}
-        },
-        {
-          "id": "organize",
-          "options": {
-            "excludeByName": {},
-            "indexByName": {},
-            "renameByName": {
-              "Value #A": "Requests",
-              "Value #B": "Errors",
-              "cluster_name 2": "",
-              "server_name 2": ""
-            }
-          }
-        }
-      ],
+      "timeFrom": "$QuickStatsInterval",
+      "title": "Current Meta Leader",
       "type": "stat"
     },
     {
@@ -448,24 +434,12 @@
         "type": "prometheus",
         "uid": "${prom_ds}"
       },
-      "description": "",
       "fieldConfig": {
         "defaults": {
           "color": {
-            "fixedColor": "rgb(31, 120, 193)",
-            "mode": "fixed"
+            "mode": "thresholds"
           },
-          "mappings": [
-            {
-              "options": {
-                "match": "null",
-                "result": {
-                  "text": "N/A"
-                }
-              },
-              "type": "special"
-            }
-          ],
+          "mappings": [],
           "thresholds": {
             "mode": "absolute",
             "steps": [
@@ -478,19 +452,21 @@
                 "value": 80
               }
             ]
-          },
-          "unit": "short"
+          }
         },
         "overrides": [
           {
             "matcher": {
-              "id": "byRegexp",
-              "options": "/.+_bytes.+/"
+              "id": "byName",
+              "options": "Errors"
             },
             "properties": [
               {
-                "id": "unit",
-                "value": "Bps"
+                "id": "color",
+                "value": {
+                  "fixedColor": "red",
+                  "mode": "fixed"
+                }
               }
             ]
           }
@@ -502,13 +478,10 @@
         "x": 11,
         "y": 5
       },
-      "hideTimeOverride": true,
-      "id": 298,
-      "interval": "$ScrapeInterval",
-      "maxPerRow": 12,
+      "id": 305,
       "options": {
         "colorMode": "value",
-        "graphMode": "none",
+        "graphMode": "area",
         "justifyMode": "auto",
         "orientation": "vertical",
         "percentChangeColorMode": "standard",
@@ -521,26 +494,53 @@
         },
         "showPercentChange": false,
         "text": {},
-        "textMode": "name",
+        "textMode": "auto",
         "wideLayout": true
       },
       "pluginVersion": "12.3.3",
       "targets": [
         {
-          "editorMode": "code",
+          "editorMode": "builder",
           "exemplar": false,
-          "expr": "nats_core_jetstream_cluster_raft_group_leader > 0",
-          "format": "time_series",
-          "hide": false,
+          "expr": "nats_core_jetstream_api_requests",
+          "format": "table",
           "instant": true,
-          "interval": "",
-          "legendFormat": "{{server_name}}",
+          "legendFormat": "__auto",
           "range": false,
           "refId": "A"
+        },
+        {
+          "editorMode": "builder",
+          "exemplar": false,
+          "expr": "nats_core_jetstream_api_errors",
+          "format": "table",
+          "hide": false,
+          "instant": true,
+          "legendFormat": "__auto",
+          "range": false,
+          "refId": "B"
         }
       ],
-      "timeFrom": "$QuickStatsInterval",
-      "title": "Current Meta Leader",
+      "title": "API Statistics",
+      "transformations": [
+        {
+          "id": "concatenate",
+          "options": {}
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {},
+            "indexByName": {},
+            "renameByName": {
+              "Value #A": "Requests",
+              "Value #B": "Errors",
+              "cluster_name 2": "",
+              "server_name 2": ""
+            }
+          }
+        }
+      ],
       "type": "stat"
     },
     {
@@ -2067,5 +2067,5 @@
   "timezone": "",
   "title": "JetStream State and Metrics",
   "uid": "fLxkFSIVk",
-  "version": 1
+  "version": 2
 }
