@@ -24,7 +24,7 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 1,
-  "id": 11,
+  "id": 21,
   "links": [],
   "liveNow": true,
   "panels": [
@@ -69,7 +69,7 @@
             "steps": [
               {
                 "color": "green",
-                "value": null
+                "value": 0
               }
             ]
           },
@@ -78,21 +78,21 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 10,
-        "w": 2,
+        "h": 8,
+        "w": 5,
         "x": 0,
         "y": 1
       },
       "hideTimeOverride": true,
       "id": 177,
       "interval": "$ScrapeInterval",
-      "links": [],
       "maxPerRow": 12,
       "options": {
         "colorMode": "none",
         "graphMode": "area",
         "justifyMode": "auto",
         "orientation": "horizontal",
+        "percentChangeColorMode": "standard",
         "reduceOptions": {
           "calcs": [
             "lastNotNull"
@@ -100,10 +100,11 @@
           "fields": "",
           "values": false
         },
-        "textMode": "auto"
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
       },
-      "pluginVersion": "9.1.3",
-      "repeatDirection": "h",
+      "pluginVersion": "12.3.3",
       "targets": [
         {
           "editorMode": "code",
@@ -144,109 +145,7 @@
       ],
       "timeFrom": "$QuickStatsInterval",
       "title": "Topology",
-      "transparent": true,
       "type": "stat"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "${prom_ds}"
-      },
-      "description": "",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "fixedColor": "rgb(31, 120, 193)",
-            "mode": "palette-classic"
-          },
-          "mappings": [
-            {
-              "options": {
-                "match": "null",
-                "result": {
-                  "text": "N/A"
-                }
-              },
-              "type": "special"
-            }
-          ],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          },
-          "unit": "decbytes"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 5,
-        "w": 5,
-        "x": 2,
-        "y": 1
-      },
-      "hideTimeOverride": true,
-      "id": 295,
-      "interval": "$ScrapeInterval",
-      "links": [],
-      "options": {
-        "displayMode": "gradient",
-        "minVizHeight": 10,
-        "minVizWidth": 0,
-        "orientation": "horizontal",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "showUnfilled": true
-      },
-      "pluginVersion": "9.1.3",
-      "repeatDirection": "h",
-      "targets": [
-        {
-          "editorMode": "code",
-          "exemplar": false,
-          "expr": "sum(nats_core_jetstream_filestore_size_bytes{})",
-          "hide": false,
-          "interval": "",
-          "legendFormat": "Capacity",
-          "range": true,
-          "refId": "A"
-        },
-        {
-          "editorMode": "code",
-          "exemplar": true,
-          "expr": "sum(nats_core_jetstream_filestore_used_bytes{})",
-          "hide": false,
-          "interval": "",
-          "legendFormat": "Used",
-          "range": true,
-          "refId": "B"
-        },
-        {
-          "exemplar": true,
-          "expr": "sum(nats_core_jetstream_filestore_reserved_bytes{})",
-          "hide": false,
-          "interval": "",
-          "legendFormat": "Reserved",
-          "refId": "C"
-        }
-      ],
-      "timeFrom": "$QuickStatsInterval",
-      "title": "Filestore",
-      "transparent": true,
-      "type": "bargauge"
     },
     {
       "datasource": {
@@ -273,9 +172,9 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 10,
-        "w": 5,
-        "x": 7,
+        "h": 8,
+        "w": 6,
+        "x": 5,
         "y": 1
       },
       "id": 293,
@@ -298,12 +197,14 @@
           "fields": "",
           "values": true
         },
+        "sort": "desc",
         "tooltip": {
+          "hideZeros": false,
           "mode": "single",
           "sort": "none"
         }
       },
-      "pluginVersion": "9.1.3",
+      "pluginVersion": "12.3.3",
       "targets": [
         {
           "editorMode": "builder",
@@ -318,105 +219,7 @@
         }
       ],
       "title": "HA Asset Distribution by Server",
-      "transformations": [],
       "type": "piechart"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "${prom_ds}"
-      },
-      "description": "Highly Available Asset Count including replicated streams, objects, KV stores, and replicated consumers.  Not applicable to single server mode.",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "axisCenteredZero": false,
-            "axisColorMode": "text",
-            "axisGridShow": true,
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "drawStyle": "line",
-            "fillOpacity": 50,
-            "gradientMode": "none",
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            },
-            "lineInterpolation": "stepBefore",
-            "lineWidth": 2,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "auto",
-            "spanNulls": false,
-            "stacking": {
-              "group": "A",
-              "mode": "normal"
-            },
-            "thresholdsStyle": {
-              "mode": "off"
-            }
-          },
-          "decimals": 0,
-          "mappings": [],
-          "min": 0,
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              }
-            ]
-          }
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 10,
-        "w": 6,
-        "x": 12,
-        "y": 1
-      },
-      "id": 282,
-      "options": {
-        "legend": {
-          "calcs": [
-            "lastNotNull",
-            "max",
-            "mean"
-          ],
-          "displayMode": "table",
-          "placement": "right",
-          "showLegend": true
-        },
-        "tooltip": {
-          "mode": "single",
-          "sort": "none"
-        }
-      },
-      "targets": [
-        {
-          "editorMode": "builder",
-          "exemplar": false,
-          "expr": "sum by(server_name) (nats_core_jetstream_ha_assets)",
-          "format": "time_series",
-          "instant": false,
-          "interval": "1",
-          "legendFormat": "{{server_id}}",
-          "range": true,
-          "refId": "A"
-        }
-      ],
-      "title": "HA Asset Count by Server",
-      "transformations": [],
-      "type": "timeseries"
     },
     {
       "datasource": {
@@ -434,7 +237,7 @@
             "steps": [
               {
                 "color": "green",
-                "value": null
+                "value": 0
               },
               {
                 "color": "red",
@@ -462,9 +265,9 @@
         ]
       },
       "gridPos": {
-        "h": 10,
-        "w": 2,
-        "x": 18,
+        "h": 4,
+        "w": 4,
+        "x": 11,
         "y": 1
       },
       "id": 305,
@@ -473,6 +276,7 @@
         "graphMode": "area",
         "justifyMode": "auto",
         "orientation": "vertical",
+        "percentChangeColorMode": "standard",
         "reduceOptions": {
           "calcs": [
             "lastNotNull"
@@ -480,10 +284,12 @@
           "fields": "",
           "values": false
         },
+        "showPercentChange": false,
         "text": {},
-        "textMode": "auto"
+        "textMode": "auto",
+        "wideLayout": true
       },
-      "pluginVersion": "9.1.3",
+      "pluginVersion": "12.3.3",
       "targets": [
         {
           "editorMode": "builder",
@@ -557,7 +363,7 @@
             "steps": [
               {
                 "color": "green",
-                "value": null
+                "value": 0
               },
               {
                 "color": "red",
@@ -570,19 +376,26 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 5,
-        "w": 5,
-        "x": 2,
-        "y": 6
+        "h": 4,
+        "w": 9,
+        "x": 15,
+        "y": 1
       },
       "hideTimeOverride": true,
       "id": 268,
       "interval": "$ScrapeInterval",
-      "links": [],
       "options": {
         "displayMode": "gradient",
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": false
+        },
+        "maxVizHeight": 300,
         "minVizHeight": 10,
         "minVizWidth": 0,
+        "namePlacement": "auto",
         "orientation": "horizontal",
         "reduceOptions": {
           "calcs": [
@@ -591,10 +404,11 @@
           "fields": "",
           "values": false
         },
-        "showUnfilled": true
+        "showUnfilled": true,
+        "sizing": "auto",
+        "valueMode": "color"
       },
-      "pluginVersion": "9.1.3",
-      "repeatDirection": "h",
+      "pluginVersion": "12.3.3",
       "targets": [
         {
           "editorMode": "code",
@@ -627,21 +441,7 @@
       ],
       "timeFrom": "$QuickStatsInterval",
       "title": "Memstore",
-      "transparent": true,
       "type": "bargauge"
-    },
-    {
-      "collapsed": false,
-      "gridPos": {
-        "h": 1,
-        "w": 24,
-        "x": 0,
-        "y": 11
-      },
-      "id": 302,
-      "panels": [],
-      "title": "JetStream Cluster State (Only Applicable to Clustered Mode)",
-      "type": "row"
     },
     {
       "datasource": {
@@ -671,7 +471,7 @@
             "steps": [
               {
                 "color": "green",
-                "value": null
+                "value": 0
               },
               {
                 "color": "red",
@@ -698,20 +498,20 @@
       },
       "gridPos": {
         "h": 4,
-        "w": 3,
-        "x": 0,
-        "y": 12
+        "w": 4,
+        "x": 11,
+        "y": 5
       },
       "hideTimeOverride": true,
       "id": 298,
       "interval": "$ScrapeInterval",
-      "links": [],
       "maxPerRow": 12,
       "options": {
         "colorMode": "value",
         "graphMode": "none",
         "justifyMode": "auto",
         "orientation": "vertical",
+        "percentChangeColorMode": "standard",
         "reduceOptions": {
           "calcs": [
             "lastNotNull"
@@ -719,11 +519,12 @@
           "fields": "",
           "values": false
         },
+        "showPercentChange": false,
         "text": {},
-        "textMode": "name"
+        "textMode": "name",
+        "wideLayout": true
       },
-      "pluginVersion": "9.1.3",
-      "repeatDirection": "h",
+      "pluginVersion": "12.3.3",
       "targets": [
         {
           "editorMode": "code",
@@ -740,8 +541,128 @@
       ],
       "timeFrom": "$QuickStatsInterval",
       "title": "Current Meta Leader",
-      "transparent": true,
       "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${prom_ds}"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "fixedColor": "rgb(31, 120, 193)",
+            "mode": "palette-classic"
+          },
+          "mappings": [
+            {
+              "options": {
+                "match": "null",
+                "result": {
+                  "text": "N/A"
+                }
+              },
+              "type": "special"
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "decbytes"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 9,
+        "x": 15,
+        "y": 5
+      },
+      "hideTimeOverride": true,
+      "id": 295,
+      "interval": "$ScrapeInterval",
+      "options": {
+        "displayMode": "gradient",
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": false
+        },
+        "maxVizHeight": 300,
+        "minVizHeight": 10,
+        "minVizWidth": 0,
+        "namePlacement": "auto",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showUnfilled": true,
+        "sizing": "auto",
+        "valueMode": "color"
+      },
+      "pluginVersion": "12.3.3",
+      "targets": [
+        {
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "sum(nats_core_jetstream_filestore_size_bytes{})",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "Capacity",
+          "range": true,
+          "refId": "A"
+        },
+        {
+          "editorMode": "code",
+          "exemplar": true,
+          "expr": "sum(nats_core_jetstream_filestore_used_bytes{})",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "Used",
+          "range": true,
+          "refId": "B"
+        },
+        {
+          "exemplar": true,
+          "expr": "sum(nats_core_jetstream_filestore_reserved_bytes{})",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "Reserved",
+          "refId": "C"
+        }
+      ],
+      "timeFrom": "$QuickStatsInterval",
+      "title": "Filestore",
+      "type": "bargauge"
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 9
+      },
+      "id": 302,
+      "panels": [],
+      "title": "JetStream Cluster State (Only Applicable to Clustered Mode)",
+      "type": "row"
     },
     {
       "datasource": {
@@ -755,7 +676,14 @@
             "mode": "continuous-BlPu"
           },
           "custom": {
+            "axisPlacement": "auto",
             "fillOpacity": 70,
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
             "lineWidth": 0,
             "spanNulls": false
           },
@@ -765,7 +693,7 @@
             "steps": [
               {
                 "color": "green",
-                "value": null
+                "value": 0
               },
               {
                 "color": "red",
@@ -777,15 +705,14 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 10,
-        "w": 6,
-        "x": 3,
-        "y": 12
+        "h": 6,
+        "w": 12,
+        "x": 0,
+        "y": 10
       },
       "hideTimeOverride": true,
       "id": 303,
       "interval": "$ScrapeInterval",
-      "links": [],
       "options": {
         "alignValue": "left",
         "legend": {
@@ -797,12 +724,12 @@
         "rowHeight": 0.9,
         "showValue": "never",
         "tooltip": {
+          "hideZeros": false,
           "mode": "single",
           "sort": "none"
         }
       },
-      "pluginVersion": "9.1.3",
-      "repeatDirection": "h",
+      "pluginVersion": "12.3.3",
       "targets": [
         {
           "editorMode": "code",
@@ -818,7 +745,6 @@
       ],
       "timeFrom": "$QuickStatsInterval",
       "title": "Meta-Leader",
-      "transparent": true,
       "type": "state-timeline"
     },
     {
@@ -834,7 +760,12 @@
           },
           "custom": {
             "align": "auto",
-            "displayMode": "auto",
+            "cellOptions": {
+              "type": "auto"
+            },
+            "footer": {
+              "reducers": []
+            },
             "inspect": false
           },
           "mappings": [],
@@ -843,7 +774,7 @@
             "steps": [
               {
                 "color": "green",
-                "value": null
+                "value": 0
               }
             ]
           }
@@ -882,7 +813,7 @@
                   "steps": [
                     {
                       "color": "green",
-                      "value": null
+                      "value": 0
                     },
                     {
                       "color": "#EAB839",
@@ -892,8 +823,11 @@
                 }
               },
               {
-                "id": "custom.displayMode",
-                "value": "color-background-solid"
+                "id": "custom.cellOptions",
+                "value": {
+                  "mode": "basic",
+                  "type": "color-background"
+                }
               }
             ]
           },
@@ -930,7 +864,7 @@
                   "steps": [
                     {
                       "color": "green",
-                      "value": null
+                      "value": 0
                     },
                     {
                       "color": "red",
@@ -940,8 +874,11 @@
                 }
               },
               {
-                "id": "custom.displayMode",
-                "value": "color-background-solid"
+                "id": "custom.cellOptions",
+                "value": {
+                  "mode": "basic",
+                  "type": "color-background"
+                }
               }
             ]
           },
@@ -956,8 +893,11 @@
                 "value": "ns"
               },
               {
-                "id": "custom.displayMode",
-                "value": "color-background-solid"
+                "id": "custom.cellOptions",
+                "value": {
+                  "mode": "basic",
+                  "type": "color-background"
+                }
               },
               {
                 "id": "thresholds",
@@ -966,7 +906,7 @@
                   "steps": [
                     {
                       "color": "green",
-                      "value": null
+                      "value": 0
                     },
                     {
                       "color": "#EAB839",
@@ -984,21 +924,15 @@
         ]
       },
       "gridPos": {
-        "h": 10,
-        "w": 11,
-        "x": 9,
-        "y": 12
+        "h": 6,
+        "w": 12,
+        "x": 12,
+        "y": 10
       },
       "id": 300,
       "maxPerRow": 3,
       "options": {
-        "footer": {
-          "fields": "",
-          "reducer": [
-            "min"
-          ],
-          "show": false
-        },
+        "cellHeight": "sm",
         "showHeader": true,
         "sortBy": [
           {
@@ -1007,8 +941,7 @@
           }
         ]
       },
-      "pluginVersion": "9.1.3",
-      "repeatDirection": "h",
+      "pluginVersion": "12.3.3",
       "targets": [
         {
           "editorMode": "code",
@@ -1095,12 +1028,349 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 22
+        "y": 16
       },
       "id": 316,
       "panels": [],
       "title": "JetStream Account Details  (Requires Surveyor Accounts Enabled)",
       "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${prom_ds}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "decimals": 0,
+          "mappings": [],
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "decbytes"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 12,
+        "x": 0,
+        "y": 17
+      },
+      "id": 320,
+      "options": {
+        "displayMode": "gradient",
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": false
+        },
+        "maxVizHeight": 300,
+        "minVizHeight": 10,
+        "minVizWidth": 0,
+        "namePlacement": "auto",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showUnfilled": true,
+        "sizing": "auto",
+        "valueMode": "color"
+      },
+      "pluginVersion": "12.3.3",
+      "targets": [
+        {
+          "editorMode": "builder",
+          "exemplar": false,
+          "expr": "nats_core_account_jetstream_storage_used",
+          "format": "time_series",
+          "instant": true,
+          "interval": "1",
+          "legendFormat": "{{account}}",
+          "range": false,
+          "refId": "A"
+        }
+      ],
+      "title": "File Storage By Account",
+      "transformations": [
+        {
+          "id": "concatenate",
+          "options": {}
+        }
+      ],
+      "type": "bargauge"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${prom_ds}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "decimals": 0,
+          "mappings": [],
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "decbytes"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 12,
+        "x": 12,
+        "y": 17
+      },
+      "id": 321,
+      "options": {
+        "displayMode": "gradient",
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": false
+        },
+        "maxVizHeight": 300,
+        "minVizHeight": 10,
+        "minVizWidth": 0,
+        "namePlacement": "auto",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showUnfilled": true,
+        "sizing": "auto",
+        "valueMode": "color"
+      },
+      "pluginVersion": "12.3.3",
+      "targets": [
+        {
+          "editorMode": "builder",
+          "exemplar": false,
+          "expr": "nats_core_account_jetstream_memory_used",
+          "format": "time_series",
+          "instant": true,
+          "interval": "1",
+          "legendFormat": "{{account}}",
+          "range": false,
+          "refId": "A"
+        }
+      ],
+      "title": "Memory Storage By Account",
+      "type": "bargauge"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${prom_ds}"
+      },
+      "description": "Number of Highly Available Assets by Stream.  A high number of HA Assets will place pressure on the system.",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "align": "auto",
+            "cellOptions": {
+              "type": "auto"
+            },
+            "footer": {
+              "reducers": []
+            },
+            "inspect": false
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Stream Replica Count"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 168
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 10,
+        "w": 13,
+        "x": 0,
+        "y": 23
+      },
+      "id": 319,
+      "interval": "1s",
+      "options": {
+        "cellHeight": "sm",
+        "frameIndex": 0,
+        "showHeader": true,
+        "sortBy": [
+          {
+            "desc": true,
+            "displayName": "Total HA Assets"
+          }
+        ]
+      },
+      "pluginVersion": "12.3.3",
+      "targets": [
+        {
+          "editorMode": "builder",
+          "exemplar": false,
+          "expr": "nats_core_account_jetstream_consumer_count",
+          "format": "table",
+          "instant": true,
+          "legendFormat": "__auto",
+          "range": false,
+          "refId": "A"
+        },
+        {
+          "hide": false,
+          "refId": "B"
+        },
+        {
+          "editorMode": "builder",
+          "exemplar": false,
+          "expr": "nats_core_account_jetstream_replica_count",
+          "format": "table",
+          "hide": false,
+          "instant": true,
+          "legendFormat": "__auto",
+          "range": false,
+          "refId": "C"
+        },
+        {
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "nats_core_account_jetstream_replica_count + (nats_core_account_jetstream_replica_count * nats_core_account_jetstream_consumer_count)",
+          "format": "table",
+          "hide": false,
+          "instant": true,
+          "legendFormat": "__auto",
+          "range": false,
+          "refId": "D"
+        }
+      ],
+      "title": "HA Assets By Stream",
+      "transformations": [
+        {
+          "id": "concatenate",
+          "options": {}
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "Time": true,
+              "Value #A": false,
+              "__name__": true,
+              "__name__ 1": true,
+              "__name__ 2": true,
+              "account": false,
+              "account 2": true,
+              "account 3": true,
+              "instance": true,
+              "instance 1": true,
+              "instance 2": true,
+              "instance 3": true,
+              "job": true,
+              "job 1": true,
+              "job 2": true,
+              "job 3": true,
+              "stream 2": true,
+              "stream 3": true
+            },
+            "indexByName": {
+              "Time": 0,
+              "Value #A": 8,
+              "Value #C": 7,
+              "Value #D": 6,
+              "__name__ 1": 1,
+              "__name__ 2": 9,
+              "account 1": 2,
+              "account 2": 10,
+              "account 3": 14,
+              "instance 1": 3,
+              "instance 2": 11,
+              "instance 3": 15,
+              "job 1": 4,
+              "job 2": 12,
+              "job 3": 16,
+              "stream 1": 5,
+              "stream 2": 13,
+              "stream 3": 17
+            },
+            "renameByName": {
+              "Value": "Consumer Count",
+              "Value #A": "Stream Consumer Count",
+              "Value #B": "Replica Count",
+              "Value #C": "Stream Replica Count",
+              "Value #D": "Total HA Assets",
+              "account": "Account",
+              "account 1": "Account",
+              "stream": "Stream ",
+              "stream 1": "HA Stream (R>1)",
+              "stream 2": ""
+            }
+          }
+        }
+      ],
+      "type": "table"
     },
     {
       "datasource": {
@@ -1115,7 +1385,12 @@
           },
           "custom": {
             "align": "auto",
-            "displayMode": "auto",
+            "cellOptions": {
+              "type": "auto"
+            },
+            "footer": {
+              "reducers": []
+            },
             "inspect": false
           },
           "mappings": [],
@@ -1124,7 +1399,7 @@
             "steps": [
               {
                 "color": "green",
-                "value": null
+                "value": 0
               }
             ]
           }
@@ -1161,8 +1436,10 @@
             },
             "properties": [
               {
-                "id": "custom.displayMode",
-                "value": "auto"
+                "id": "custom.cellOptions",
+                "value": {
+                  "type": "auto"
+                }
               },
               {
                 "id": "unit",
@@ -1191,7 +1468,7 @@
                   "steps": [
                     {
                       "color": "green",
-                      "value": null
+                      "value": 0
                     },
                     {
                       "color": "orange",
@@ -1205,8 +1482,11 @@
                 }
               },
               {
-                "id": "custom.displayMode",
-                "value": "gradient-gauge"
+                "id": "custom.cellOptions",
+                "value": {
+                  "mode": "gradient",
+                  "type": "gauge"
+                }
               },
               {
                 "id": "max",
@@ -1231,7 +1511,7 @@
                   "steps": [
                     {
                       "color": "green",
-                      "value": null
+                      "value": 0
                     },
                     {
                       "color": "yellow",
@@ -1245,8 +1525,11 @@
                 }
               },
               {
-                "id": "custom.displayMode",
-                "value": "gradient-gauge"
+                "id": "custom.cellOptions",
+                "value": {
+                  "mode": "gradient",
+                  "type": "gauge"
+                }
               },
               {
                 "id": "max",
@@ -1265,24 +1548,30 @@
                 "value": "decbytes"
               }
             ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Account"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 105
+              }
+            ]
           }
         ]
       },
       "gridPos": {
-        "h": 8,
-        "w": 13,
-        "x": 0,
+        "h": 6,
+        "w": 11,
+        "x": 13,
         "y": 23
       },
       "id": 314,
       "options": {
-        "footer": {
-          "fields": "",
-          "reducer": [
-            "sum"
-          ],
-          "show": false
-        },
+        "cellHeight": "sm",
         "showHeader": true,
         "sortBy": [
           {
@@ -1291,7 +1580,7 @@
           }
         ]
       },
-      "pluginVersion": "9.1.3",
+      "pluginVersion": "12.3.3",
       "targets": [
         {
           "editorMode": "builder",
@@ -1499,340 +1788,33 @@
         }
       ],
       "type": "table"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "${prom_ds}"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "palette-classic"
-          },
-          "decimals": 0,
-          "mappings": [],
-          "min": 0,
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          },
-          "unit": "decbytes"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 16,
-        "w": 5,
-        "x": 13,
-        "y": 23
-      },
-      "id": 320,
-      "options": {
-        "displayMode": "gradient",
-        "minVizHeight": 10,
-        "minVizWidth": 0,
-        "orientation": "horizontal",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "showUnfilled": true
-      },
-      "pluginVersion": "9.1.3",
-      "targets": [
-        {
-          "editorMode": "builder",
-          "exemplar": false,
-          "expr": "nats_core_account_jetstream_storage_used",
-          "format": "time_series",
-          "instant": true,
-          "interval": "1",
-          "legendFormat": "{{account}}",
-          "range": false,
-          "refId": "A"
-        }
-      ],
-      "title": "File Storage By Account",
-      "transformations": [
-        {
-          "id": "concatenate",
-          "options": {}
-        }
-      ],
-      "type": "bargauge"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "${prom_ds}"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "palette-classic"
-          },
-          "decimals": 0,
-          "mappings": [],
-          "min": 0,
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          },
-          "unit": "decbytes"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 16,
-        "w": 5,
-        "x": 18,
-        "y": 23
-      },
-      "id": 321,
-      "options": {
-        "displayMode": "gradient",
-        "minVizHeight": 10,
-        "minVizWidth": 0,
-        "orientation": "horizontal",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "showUnfilled": true
-      },
-      "pluginVersion": "9.1.3",
-      "targets": [
-        {
-          "editorMode": "builder",
-          "exemplar": false,
-          "expr": "nats_core_account_jetstream_memory_used",
-          "format": "time_series",
-          "instant": true,
-          "interval": "1",
-          "legendFormat": "{{account}}",
-          "range": false,
-          "refId": "A"
-        }
-      ],
-      "title": "Memory Storage By Account",
-      "transformations": [],
-      "type": "bargauge"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "${prom_ds}"
-      },
-      "description": "Number of Highly Available Assets by Stream.  A high number of HA Assets will place pressure on the system.",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "custom": {
-            "align": "auto",
-            "displayMode": "auto",
-            "inspect": false
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          }
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 8,
-        "w": 13,
-        "x": 0,
-        "y": 31
-      },
-      "id": 319,
-      "interval": "1s",
-      "options": {
-        "footer": {
-          "fields": "",
-          "reducer": [
-            "sum"
-          ],
-          "show": false
-        },
-        "frameIndex": 0,
-        "showHeader": true,
-        "sortBy": [
-          {
-            "desc": true,
-            "displayName": "Total HA Assets"
-          }
-        ]
-      },
-      "pluginVersion": "9.1.3",
-      "targets": [
-        {
-          "editorMode": "builder",
-          "exemplar": false,
-          "expr": "nats_core_account_jetstream_consumer_count",
-          "format": "table",
-          "instant": true,
-          "legendFormat": "__auto",
-          "range": false,
-          "refId": "A"
-        },
-        {
-          "hide": false,
-          "refId": "B"
-        },
-        {
-          "editorMode": "builder",
-          "exemplar": false,
-          "expr": "nats_core_account_jetstream_replica_count",
-          "format": "table",
-          "hide": false,
-          "instant": true,
-          "legendFormat": "__auto",
-          "range": false,
-          "refId": "C"
-        },
-        {
-          "editorMode": "code",
-          "exemplar": false,
-          "expr": "nats_core_account_jetstream_replica_count + (nats_core_account_jetstream_replica_count * nats_core_account_jetstream_consumer_count)",
-          "format": "table",
-          "hide": false,
-          "instant": true,
-          "legendFormat": "__auto",
-          "range": false,
-          "refId": "D"
-        }
-      ],
-      "title": "HA Assets By Stream",
-      "transformations": [
-        {
-          "id": "concatenate",
-          "options": {}
-        },
-        {
-          "id": "organize",
-          "options": {
-            "excludeByName": {
-              "Time": true,
-              "Value #A": false,
-              "__name__": true,
-              "__name__ 1": true,
-              "__name__ 2": true,
-              "account": false,
-              "account 2": true,
-              "account 3": true,
-              "instance": true,
-              "instance 1": true,
-              "instance 2": true,
-              "instance 3": true,
-              "job": true,
-              "job 1": true,
-              "job 2": true,
-              "job 3": true,
-              "stream 2": true,
-              "stream 3": true
-            },
-            "indexByName": {
-              "Time": 0,
-              "Value #A": 8,
-              "Value #C": 7,
-              "Value #D": 6,
-              "__name__ 1": 1,
-              "__name__ 2": 9,
-              "account 1": 2,
-              "account 2": 10,
-              "account 3": 14,
-              "instance 1": 3,
-              "instance 2": 11,
-              "instance 3": 15,
-              "job 1": 4,
-              "job 2": 12,
-              "job 3": 16,
-              "stream 1": 5,
-              "stream 2": 13,
-              "stream 3": 17
-            },
-            "renameByName": {
-              "Value": "Consumer Count",
-              "Value #A": "Stream Consumer Count",
-              "Value #B": "Replica Count",
-              "Value #C": "Stream Replica Count",
-              "Value #D": "Total HA Assets",
-              "account": "Account",
-              "account 1": "Account",
-              "stream": "Stream ",
-              "stream 1": "HA Stream (R>1)",
-              "stream 2": ""
-            }
-          }
-        }
-      ],
-      "type": "table"
     }
   ],
+  "preload": false,
   "refresh": "5s",
-  "schemaVersion": 37,
-  "style": "dark",
+  "schemaVersion": 42,
   "tags": [
     "surveyor"
   ],
   "templating": {
     "list": [
       {
-        "type": "datasource",
-        "name": "prom_ds",
         "label": "Prometheus Datasource",
+        "name": "prom_ds",
+        "options": [],
         "query": "prometheus",
-        "refresh": 1
+        "refresh": 1,
+        "type": "datasource"
       },
       {
         "auto": false,
         "auto_count": 30,
         "auto_min": "10s",
         "current": {
-          "selected": false,
           "text": "5m",
           "value": "5m"
         },
         "description": "Duration of top row metrics",
-        "hide": 0,
         "label": "Summary Duration",
         "name": "QuickStatsInterval",
         "options": [
@@ -1893,14 +1875,11 @@
           }
         ],
         "query": "5m,30s,1m,15m,30m,1h,2h,4h,8h,12h,1d",
-        "queryValue": "",
         "refresh": 2,
-        "skipUrlSync": false,
         "type": "interval"
       },
       {
         "current": {
-          "selected": true,
           "text": [
             "All"
           ],
@@ -1909,7 +1888,6 @@
           ]
         },
         "description": "Add/Remove Summary Metrics from the Top Row",
-        "hide": 0,
         "includeAll": true,
         "label": "SummaryMetrics",
         "multi": true,
@@ -1972,13 +1950,10 @@
           }
         ],
         "query": "Received Messages : sum(irate(nats_core_recv_msgs_count{}[$__rate_interval])), Sent Messages : sum(irate(nats_core_sent_msgs_count{}[$__rate_interval])), Received Bytes : sum(irate(nats_core_recv_bytes{}[$__rate_interval])), Sent Bytes : sum(irate(nats_core_sent_bytes{}[$__rate_interval])), Connections : sum(nats_core_connection_count{}), Slow Consumers : sum(irate(nats_core_slow_consumer_count{}[$__rate_interval])), Clusters : count(sum(nats_core_info{}) by (server_cluster)), Servers : count(nats_core_info{}), Route Count : sum(nats_core_route_count{}), Gateway Count : sum(nats_core_gateway_count{})",
-        "queryValue": "",
-        "skipUrlSync": false,
         "type": "custom"
       },
       {
         "current": {
-          "selected": false,
           "text": "surveyor",
           "value": "surveyor"
         },
@@ -1989,7 +1964,6 @@
         "definition": "label_values(nats_core_info, job)",
         "hide": 2,
         "includeAll": false,
-        "multi": false,
         "name": "surveyor_job",
         "options": [],
         "query": {
@@ -1998,13 +1972,10 @@
         },
         "refresh": 1,
         "regex": "",
-        "skipUrlSync": false,
-        "sort": 0,
         "type": "query"
       },
       {
         "current": {
-          "selected": false,
           "text": "localhost:7777",
           "value": "localhost:7777"
         },
@@ -2015,7 +1986,6 @@
         "definition": "label_values(nats_core_info{job=~\"$surveyor_job\"}, instance)",
         "hide": 2,
         "includeAll": false,
-        "multi": false,
         "name": "surveyor_instance",
         "options": [],
         "query": {
@@ -2024,14 +1994,11 @@
         },
         "refresh": 1,
         "regex": "",
-        "skipUrlSync": false,
-        "sort": 0,
         "type": "query"
       },
       {
         "allValue": ".*",
         "current": {
-          "selected": true,
           "text": [
             "All"
           ],
@@ -2045,7 +2012,6 @@
         },
         "definition": "label_values(nats_core_info{job=~\"$surveyor_job\", instance=~\"$surveyor_instance\"}, server_cluster)",
         "description": "Pick a Cluster. NOTE: top row \"Summary Metrics\" ignore the cluster selection currently.",
-        "hide": 0,
         "includeAll": true,
         "label": "Cluster",
         "multi": true,
@@ -2057,19 +2023,14 @@
         },
         "refresh": 1,
         "regex": "",
-        "skipUrlSync": false,
         "sort": 1,
-        "tagValuesQuery": "",
-        "tagsQuery": "",
-        "type": "query",
-        "useTags": false
+        "type": "query"
       },
       {
         "auto": false,
         "auto_count": 30,
         "auto_min": "10s",
         "current": {
-          "selected": false,
           "text": "5s",
           "value": "5s"
         },
@@ -2084,18 +2045,16 @@
         ],
         "query": "5s",
         "refresh": 2,
-        "skipUrlSync": false,
         "type": "interval"
       },
       {
+        "baseFilters": [],
         "datasource": {
           "type": "prometheus",
           "uid": "${prom_ds}"
         },
         "filters": [],
-        "hide": 0,
         "name": "Filters",
-        "skipUrlSync": false,
         "type": "adhoc"
       }
     ]
@@ -2104,23 +2063,9 @@
     "from": "now-5m",
     "to": "now"
   },
-  "timepicker": {
-    "refresh_intervals": [
-      "5s",
-      "10s",
-      "30s",
-      "1m",
-      "5m",
-      "15m",
-      "30m",
-      "1h",
-      "2h",
-      "1d"
-    ]
-  },
+  "timepicker": {},
   "timezone": "",
   "title": "JetStream State and Metrics",
   "uid": "fLxkFSIVk",
-  "version": 11,
-  "weekStart": ""
+  "version": 1
 }
