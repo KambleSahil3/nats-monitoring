@@ -24,7 +24,7 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 1,
-  "id": 20,
+  "id": 28,
   "links": [],
   "panels": [
     {
@@ -34,7 +34,7 @@
       },
       "fieldConfig": {
         "defaults": {
-          "decimals": 3,
+          "decimals": 1,
           "mappings": [],
           "max": 1,
           "min": 0,
@@ -88,7 +88,7 @@
             "type": "prometheus",
             "uid": "${prom_ds}"
           },
-          "expr": "nats_core_jetstream_memstore_used_bytes{server_name=~\"$server\"}",
+          "expr": "nats_core_jetstream_memstore_used_bytes{server_name=~\"$server\"} / nats_core_jetstream_server_max_memory{server_name=~\"$server\"}",
           "interval": "",
           "legendFormat": "{{server_name}}",
           "refId": "A"
@@ -114,7 +114,7 @@
       },
       "fieldConfig": {
         "defaults": {
-          "decimals": 3,
+          "decimals": 1,
           "mappings": [],
           "max": 1,
           "min": 0,
@@ -168,7 +168,7 @@
             "type": "prometheus",
             "uid": "${prom_ds}"
           },
-          "expr": "nats_core_jetstream_filestore_used_bytes{server_name=~\"$server\"}",
+          "expr": "nats_core_jetstream_filestore_used_bytes{server_name=~\"$server\"} / nats_core_jetstream_server_max_storage{server_name=~\"$server\"}",
           "interval": "",
           "legendFormat": "{{server_name}}",
           "refId": "A"
@@ -939,5 +939,5 @@
   "timezone": "browser",
   "title": "NATS JetStream",
   "uid": "yQUo5l17k",
-  "version": 11
+  "version": 10
 }
