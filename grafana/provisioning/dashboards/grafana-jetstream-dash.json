@@ -668,7 +668,7 @@
             "type": "prometheus",
             "uid": "${prom_ds}"
           },
-          "expr": "nats_core_jetstream_server_total_message_bytes{server_name=~\"$server\"}",
+          "expr": "nats_stream_total_bytes{stream_name=~\"$stream\"}",
           "interval": "",
           "legendFormat": "{{stream_name}}",
           "refId": "A"
@@ -766,7 +766,7 @@
             "type": "prometheus",
             "uid": "${prom_ds}"
           },
-          "expr": "nats_core_jetstream_server_total_messages{server_name=~\"$server\"}",
+          "expr": "nats_stream_total_messages{stream_name=~\"$stream\"}",
           "interval": "",
           "legendFormat": "{{stream_name}}",
           "refId": "A"

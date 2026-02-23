@@ -15,6 +15,7 @@ services:
       - ./SYS.creds:/etc/surveyor/SYS.creds
       - ./observations:/observations
       - ./jetstream:/jetstream
+      - ./jetstream/exec-user.creds:/app/exec-user.creds
     environment:
       - NATS_SURVEYOR_CREDS=/etc/surveyor/SYS.creds
       - NATS_SURVEYOR_SERVERS
