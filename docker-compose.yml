@@ -31,7 +31,10 @@ services:
     volumes:
       - ./prometheus/:/etc/prometheus/
       - ./storage/prometheus:/usr/local/share/prometheus
-    command: --config.file=/etc/prometheus/prometheus.yml --storage.tsdb.path=/usr/local/share/prometheus
+    command: 
+    - --config.file=/etc/prometheus/prometheus.yml
+    - --storage.tsdb.path=/usr/local/share/prometheus
+    - --storage.tsdb.retention.time=30d
     networks:
       - monitor-net
     depends_on:
